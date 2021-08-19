@@ -20,15 +20,22 @@
         "spatie/laravel-package-tools": "^1.9",
         "swagger-api/swagger-ui": "^3.52"
     },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5",
+        "orchestra/testbench": "^6.19"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "YSRoot\\SwaggerUI\\SwaggerUIServiceProvider"
+            ]
+        }
+    },
     "autoload": {
         "psr-4": {
             "YSRoot\\SwaggerUI\\": "src/"
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true,
-    "require-dev": {
-        "phpunit/phpunit": "^9.5",
-        "orchestra/testbench": "^6.19"
-    }
+    "prefer-stable": true
 }
