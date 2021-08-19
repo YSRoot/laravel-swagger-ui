@@ -1,6 +1,12 @@
 {
     "name": "ysroot/laravel-swagger-ui",
+    "description": "Package for render view for swagger ui",
     "type": "library",
+    "keywords": [
+        "laraver",
+        "swagger",
+        "ui"
+    ],
     "license": "MIT",
     "authors": [
         {
@@ -8,5 +14,21 @@
             "email": "u.aleroev@bk.ru"
         }
     ],
-    "require": {}
+    "require": {
+        "php": "^7.4|^8.0",
+        "laravel/framework": ">=8.40.0 || ^7.0",
+        "spatie/laravel-package-tools": "^1.9",
+        "swagger-api/swagger-ui": "^3.52"
+    },
+    "autoload": {
+        "psr-4": {
+            "YSRoot\\SwaggerUI\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require-dev": {
+        "phpunit/phpunit": "^9.5",
+        "orchestra/testbench": "^6.19"
+    }
 }
