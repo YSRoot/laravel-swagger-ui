@@ -1,0 +1,12 @@
+{
+    "name": "ysroot/laravel-swagger-ui",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "YSRoot",
+            "email": "u.aleroev@bk.ru"
+        }
+    ],
+    "require": {}
+}
