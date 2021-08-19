@@ -12,6 +12,7 @@ return [
     ],
 
     'paths' => [
+        // По умолчанию возьмет из vendor
         'swagger_ui_assets_path' => null,
 
         /*
@@ -19,12 +20,7 @@ return [
         */
         'docs' => 'api-docs.yaml',
 
-        /*
-         * Absolute paths to directory containing the swagger annotations are stored.
-        */
-        'annotations' => [
-            base_path('app'),
-        ],
+        'refs_dir_prefix' => '/docs/',
     ],
 
 ];
