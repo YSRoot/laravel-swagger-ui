@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 class SwaggerUI
 {
-    public static function routes(callable $callback = null, array $options): void
+    public static function routes(?callable $callback = null, array $options = []): void
     {
         $callback = $callback ?: function ($router) {
             $router->all();
