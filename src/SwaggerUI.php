@@ -27,7 +27,7 @@ class SwaggerUI
 
     public static function gate(): Closure
     {
-        return $gateCallback ?? function (Request $request) {
+        return static::$gateCallback ?? function (Request $request) {
             return true;
         };
     }
