@@ -3,6 +3,8 @@
 namespace YSRoot\SwaggerUI;
 
 use Illuminate\Container\Container;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use YSRoot\SwaggerUI\Services\DocManager;
@@ -20,6 +22,10 @@ class SwaggerUIServiceProvider extends PackageServiceProvider
     {
         $this->app->singleton('docs', function () {
             return new DocManager(Container::getInstance());
+        });
+
+        Gate::define('viewSwaggerUI', function (Request $request) {
+            return call_user_func(SwaggerUI::gate(), $request);
         });
     }
 }
