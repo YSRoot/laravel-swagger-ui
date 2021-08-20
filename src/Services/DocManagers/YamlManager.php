@@ -12,7 +12,11 @@ class YamlManager implements DocManagerInterface
 
     public function content(string $filePath): string
     {
-        return Yaml::dump($this->parseYaml($filePath));
+        $parsedYaml = $this->parseYaml($filePath);
+        $parsedYaml['info']['title'] = config('swagger-ui.title');
+        $parsedYaml['servers'] = config('swagger-ui.servers');
+
+        return Yaml::dump($parsedYaml);
     }
 
     private function parseYaml(string $filePath): array

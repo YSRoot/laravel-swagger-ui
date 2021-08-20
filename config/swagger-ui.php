@@ -3,6 +3,12 @@
 return [
     'title' => 'API Doc',
 
+    'servers' => [
+        [
+            'url' => env('APP_URL', '/'),
+        ],
+    ],
+
     'routes' => [
         'swagger' => 'docs.swagger',
 
