@@ -24,8 +24,6 @@ class SwaggerUIServiceProvider extends PackageServiceProvider
             return new DocManager(Container::getInstance());
         });
 
-        Gate::define('viewSwaggerUI', function (Request $request) {
-            return call_user_func(SwaggerUI::gate(), $request);
-        });
+        Gate::define('viewSwaggerUI', SwaggerUI::gate());
     }
 }
