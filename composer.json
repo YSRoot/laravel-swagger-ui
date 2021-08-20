@@ -36,6 +36,11 @@
             "YSRoot\\SwaggerUI\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "YSRoot\\SwaggerUI\\Tests\\": "tests"
+        }
+    },
     "minimum-stability": "dev",
     "prefer-stable": true
 }
