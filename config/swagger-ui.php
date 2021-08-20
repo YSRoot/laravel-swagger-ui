@@ -22,7 +22,7 @@ return [
 
     'paths' => [
         // Путь к swagger-ui dist ассетам. По умолчанию возьмет из vendor/swagger-api/swagger-ui/dist/
-        'swagger_ui_assets_path' => null,
+        // 'swagger_ui_assets_path' => '/custom/path/../dist/',
 
         // Путь к файлу с YAML файлу с документацией
         // 'docs' => '/path/.../api-docs.yaml',
