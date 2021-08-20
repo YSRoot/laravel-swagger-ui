@@ -27,7 +27,7 @@ class YamlManager implements DocManagerInterface
     {
         foreach ($parsedYaml as $key => &$value) {
             if ($key === self::REF) {
-                $pathForRef = $this->pathForRef($value);
+                $pathForRef = $this->pathForRef($value, $filePath);
                 $parsedYaml = $this->parseYaml($pathForRef);
                 break;
             }
@@ -37,7 +37,7 @@ class YamlManager implements DocManagerInterface
         }
     }
 
-    private function pathForRef(string $value): string
+    private function pathForRef(string $value, $previousPath): string
     {
         $refsDirPrefix = config('swagger-ui.paths.refs_dir_prefix', '/docs/');
         if ($path = realpath(base_path($refsDirPrefix . $value))) {
@@ -46,11 +46,11 @@ class YamlManager implements DocManagerInterface
 
         if (
             Str::startsWith($value, '../')
-            && $path = realpath(base_path($refsDirPrefix . Str::substr($value, 3)))
+            && $path = realpath(pathinfo($previousPath)['dirname'] . '/' . $value)
         ) {
             return $path;
         };
 
-        throw new RuntimeException('Invalid swagger yaml files, may be contain invalid $ref');
+        throw new RuntimeException(sprintf('Invalid yaml file: %s, `$ref: %s` can`t read', $previousPath, $value),);
     }
 }

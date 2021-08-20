@@ -3,6 +3,7 @@
 namespace YSRoot\SwaggerUI\Http\Controllers;
 
 use Illuminate\Http\Response;
+use RuntimeException;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use YSRoot\SwaggerUI\Facades\Docs;
@@ -18,7 +19,11 @@ class SwaggerUIController
             throw new NotFoundHttpException(sprintf('Unable to locate documentation file at: "%s"', $filePath));
         }
 
-        $content = Docs::content($filePath);
+        try {
+            $content = Docs::content($filePath);
+        } catch (RuntimeException $exception) {
+            throw new NotFoundHttpException($exception->getMessage());
+        }
 
         return new Response($content, SymfonyResponse::HTTP_OK, [
             'Content-Type' => 'application/yaml',
