@@ -52,6 +52,6 @@ if (!function_exists('swagger_asset')) {
             throw new RuntimeException(sprintf('Requested swagger asset file (%s) does not exists', $asset));
         }
 
-        return route(config('swagger-ui.routes.assets', 'docs.assets')) . '?v=' . md5_file($file);
+        return route(config('swagger-ui.routes.assets', 'docs.assets'), $asset) . '?v=' . md5_file($file);
     }
 }
