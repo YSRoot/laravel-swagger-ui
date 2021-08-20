@@ -15,7 +15,8 @@ class SwaggerUIServiceProvider extends PackageServiceProvider
     {
         $package
             ->name('swagger-ui')
-            ->hasConfigFile('swagger-ui');
+            ->hasConfigFile('swagger-ui')
+            ->hasViews();
     }
 
     public function packageBooted(): void

@@ -33,7 +33,7 @@ class SwaggerUIController
 
     public function api(): Response
     {
-        return new Response(view('index', [
+        return new Response(view('swagger-ui::index', [
             'urlToDocs' => route(config('swagger-ui.routes.swagger', 'docs.swagger'))
         ]), SymfonyResponse::HTTP_OK);
     }
