@@ -53,18 +53,18 @@ SwaggerUI::routes(options: ['middleware' => ['auth']])
 ```php
 public function boot()
 {
-    SwaggerUI::$gateCallback = function (\Illuminate\Http\Request $request) {
+    SwaggerUI::$gateCallback = function (?User $user, \Illuminate\Http\Request $request) {
         // необходимо определить view-docs
-        return $request->user()->can('view-docs');
+        return optional($user)->can('view-docs');
     
         // только авторизованным пользователями из списка
-        return in_array(optional($request)->user()->email, [
+        return in_array(optional($user)->email, [
             'test@test.ru',
             //... 
         ]);
     
         // нужно определить метод isAdmin в моделе User (скорее всего)
-        return $request->user()->isAdmin();
+        return optional($user)->isAdmin();
     
     };
 }
@@ -74,7 +74,7 @@ public function boot()
 ```php
 protected function boot()
 {
-    Gate::define('viewSwaggerUI', function ($user = null) {
+    Gate::define('viewSwaggerUI', function (?User $user = null, \Illuminate\Http\Request $request) {
         return in_array(optional($user)->email, [
             //
         ]);
