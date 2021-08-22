@@ -2,7 +2,7 @@
 
 namespace YSRoot\SwaggerUI\Services\DocManagers;
 
-use http\Exception\RuntimeException;
+use RuntimeException;
 use Illuminate\Support\Str;
 use Symfony\Component\Yaml\Yaml;
 
@@ -48,13 +48,14 @@ class YamlManager implements DocManagerInterface
             return $path;
         }
 
+        // if yaml file contains in same dir or parent dir
         if (
-            Str::startsWith($value, '../')
+            (Str::startsWith($value, '../') || pathinfo($value)['dirname'] == '.')
             && $path = realpath(pathinfo($previousPath)['dirname'] . '/' . $value)
         ) {
             return $path;
         };
 
-        throw new RuntimeException(sprintf('Invalid yaml file: %s, `$ref: %s` can`t read', $previousPath, $value),);
+        throw new RuntimeException(sprintf('Invalid yaml file: %s, `$ref: %s` can`t read', $previousPath, $value));
     }
 }
