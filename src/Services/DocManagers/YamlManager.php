@@ -10,6 +10,8 @@ class YamlManager implements DocManagerInterface
 {
     const REF = '$ref';
 
+    private array $refPull = [];
+
     public function content(string $filePath): string
     {
         $parsedYaml = $this->parseYaml($filePath);
@@ -31,8 +33,13 @@ class YamlManager implements DocManagerInterface
     {
         foreach ($parsedYaml as $key => &$value) {
             if ($key === self::REF) {
+                // Если `$ref` уже был считан взять из пула
+                if (isset($this->refPull[$value])) {
+                    $parsedYaml = $this->refPull[$value];
+                    break;
+                }
                 $pathForRef = $this->pathForRef($value, $filePath);
-                $parsedYaml = $this->parseYaml($pathForRef);
+                $parsedYaml = $this->refPull[$value] = $this->parseYaml($pathForRef);
                 break;
             }
             if (is_array($value)) {
